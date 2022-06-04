@@ -3,6 +3,8 @@
 
 #include <bits/stdc++.h>
 #include "AdministrareJocuri.h"
+#include <Windows.h>
+#include <mmsystem.h>
 using namespace std;
 
 class tictactoe {

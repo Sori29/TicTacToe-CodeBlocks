@@ -1,5 +1,4 @@
 #include "tictactoe.h"
-
 tictactoe::tictactoe() {
 	initializare_tabla();
 }
@@ -132,6 +131,7 @@ void tictactoe::joc() {
 	do {
 		afisareTabla();
 		miscareJucator(jucator);
+		PlaySound(TEXT("sound1.wav"),NULL,SND_ALIAS);
 		if (verificaVictorie(jucator)) {
 			if (jucator == 'X')
 				nrVictoriJucator1++;
@@ -193,6 +193,7 @@ void tictactoe::jocVsAI() {
 		do {
 				afisareTabla();
 				miscareJucator(jucator);
+				PlaySound(TEXT("sound1.wav"),NULL,SND_ALIAS);
 				if (verificaVictorie(jucator)) {
 					if (jucator == 'X')
 						nrVictoriJucator_AI++;
@@ -210,6 +211,7 @@ void tictactoe::jocVsAI() {
 				}
 				jucator = schimbaJucator(jucator);
 				miscareAI(jucator); //comp jucator
+				PlaySound(TEXT("sound1.wav"),NULL,SND_ALIAS);
 				if (verificaVictorie(jucator)) {
 					cout << "\n *********** AVEM UN CASTIGATOR!! ***********" << endl
 						<< jucator << " A CASTIGAT!!" << endl;
@@ -230,6 +232,7 @@ void tictactoe::jocVsAI() {
 			jucator = schimbaJucator(jucator);
 			miscareAI(jucator);
 			afisareTabla();
+			PlaySound(TEXT("sound1.wav"),NULL,SND_ALIAS);
 			if (verificaVictorie(jucator)) {
 				if (jucator == 'X')
 					nrVictoriAI++;
@@ -247,6 +250,7 @@ void tictactoe::jocVsAI() {
 			}
 			jucator = schimbaJucator(jucator);
 			miscareJucator(jucator);
+			PlaySound(TEXT("sound1.wav"),NULL,SND_ALIAS);
 			if (verificaVictorie(jucator)) {
 				if (jucator == 'X')
 					nrVictoriAI++;
