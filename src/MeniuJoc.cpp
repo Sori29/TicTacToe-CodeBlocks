@@ -1,28 +1,38 @@
 #include "MeniuJoc.h"
 using namespace std;
 string numeFisier="date.txt";
-
+HANDLE h=GetStdHandle(STD_OUTPUT_HANDLE);
 char meniu() {
 	system("cls");
 	char optiune;
+	SetConsoleTextAttribute(h,10);
 	cout << "******X SI 0 CREAT DE LUNGU SORIN******" << endl;
+	SetConsoleTextAttribute(h,9);
 	cout << "Apasati 1 pentru a juca impotriva altui jucator." << endl;
+	SetConsoleTextAttribute(h,11);
 	cout << "Apasati 2 pentru a juca impotriva unui robot" << endl;
+	SetConsoleTextAttribute(h,13);
 	cout << "Apasati 3 pentru a afisa un joc la alegere"<<endl;
+	SetConsoleTextAttribute(h,12);
 	cout << "Apasati 0 pentru a iesi din joc" << endl;
+	SetConsoleTextAttribute(h,15);
 	cin >> optiune;
 	return optiune;
 }
 void salvare_joc(string numeFisier,tictactoe *joc_nou,int nrMeciuri,AdministrareJocuri *adminJocuri){
 char alegere;
 if(!numeFisier.empty()){
-    cout<<"Numele fisierului curent este "<<numeFisier<<" doriti sa schimbati numele fisierului(Y/N)\n";
+    cout<<"Numele fisierului curent este ";
+    SetConsoleTextAttribute(h,14);
+    cout<<numeFisier;
+    SetConsoleTextAttribute(h,15);
+    cout<<" doriti sa schimbati numele fisierului(Y/N):";
     cin>>alegere;
     if(toupper(alegere)=='Y')
         cin>>numeFisier;
 }
 else{
-    cout<<"Introduceti numele fisierului in formatul <name.txt>";
+    cout<<"Introduceti numele fisierului in formatul <name.txt>:";
     cin>>numeFisier;
 }
 joc_nou->setID(nrMeciuri);

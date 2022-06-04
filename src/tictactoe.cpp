@@ -124,8 +124,19 @@ bool tictactoe::verificaRemiza()const {
 }
 
 void tictactoe::joc() {
-    cout<<"ID-ul meciului este: "<<IDMeci+1<<endl;
-	cout << "SCORUL (PLAYER 1 VS PLAYER 2): " <<nrVictoriJucator1 << "-" << nrVictoriJucator2 << endl;
+    HANDLE h=GetStdHandle(STD_OUTPUT_HANDLE);
+    cout<<"ID-ul meciului este: ";
+    SetConsoleTextAttribute(h,9);
+    cout<<IDMeci+1<<endl;
+    SetConsoleTextAttribute(h,15);
+	cout << "SCORUL (PLAYER 1 VS PLAYER 2): ";
+	SetConsoleTextAttribute(h,2);
+	cout <<nrVictoriJucator1;
+	SetConsoleTextAttribute(h,15);
+	cout << "-";
+	SetConsoleTextAttribute(h,3);
+	cout << nrVictoriJucator2 << endl;
+	SetConsoleTextAttribute(h,15);
 	char jucator = 'X'; //initializare jucator
 	bool gameOver = false;
 	do {
@@ -137,12 +148,16 @@ void tictactoe::joc() {
 				nrVictoriJucator1++;
 			else
 				nrVictoriJucator2++;
+            SetConsoleTextAttribute(h,2);
 			cout << "\n *********** AVEM UN CASTIGATOR!! ***********" << endl
 				<< jucator << " A CASTIGAT!!" << endl;
+            SetConsoleTextAttribute(h,15);
 			gameOver = true;
 		}
 		else if (verificaRemiza()) {
+            SetConsoleTextAttribute(h,14);
 			cout << "ESTE O REMIZA! Jucati din nou!" << endl;
+            SetConsoleTextAttribute(h,15);
 			gameOver = true;
 		}
 		jucator = schimbaJucator(jucator);
@@ -173,12 +188,23 @@ void tictactoe::miscareAI(char jucator) {
 	cout << "Numar total de miscari: " << nrMiscari << endl;
 }
 void tictactoe::jocVsAI() {
-    cout<<"ID-ul meciului este: "<<IDMeci+1<<endl;
-	cout << "SCORUL (PLAYER VS AI) " << nrVictoriJucator_AI << "-" << nrVictoriAI<<endl;
+    HANDLE h=GetStdHandle(STD_OUTPUT_HANDLE);
+    cout<<"ID-ul meciului este: ";
+    SetConsoleTextAttribute(h,9);
+    cout<<IDMeci+1<<endl;
+    SetConsoleTextAttribute(h,15);
+	cout << "SCORUL (PLAYER VS AI) ";
+	SetConsoleTextAttribute(h,2);
+	cout<< nrVictoriJucator_AI;
+	SetConsoleTextAttribute(h,15);
+	cout << "-";
+	SetConsoleTextAttribute(h,3);
+	cout<< nrVictoriAI<<endl;
+	SetConsoleTextAttribute(h,15);
 	string input;
 	char jucator=0;
 	do {
-		cout << "Introduceti cu ce doriti sa jucati (X/O)\n";
+		cout << "Introduceti cu ce doriti sa jucati (X/O):";
 			getline(cin, input);
 			if (toupper(input[0]) == 'X' or toupper(input[0]) == 'O') {
 				jucator = toupper(input[0]);
@@ -199,13 +225,17 @@ void tictactoe::jocVsAI() {
 						nrVictoriJucator_AI++;
 					else
 						nrVictoriAI++;
+                    SetConsoleTextAttribute(h,2);
 					cout << "\n *********** AVEM UN CASTIGATOR!! ***********" << endl
 						<< jucator << " A CASTIGAT!!" << endl;
+                    SetConsoleTextAttribute(h,15);
 					gameOver = true;
 					break;
 				}
 				else if (verificaRemiza()) {
+                    SetConsoleTextAttribute(h,14);
 					cout << "ESTE O REMIZA! Jucati din nou!" << endl;
+                    SetConsoleTextAttribute(h,15);
 					gameOver = true;
 					break;
 				}
@@ -213,13 +243,17 @@ void tictactoe::jocVsAI() {
 				miscareAI(jucator); //comp jucator
 				PlaySound(TEXT("sound1.wav"),NULL,SND_ALIAS);
 				if (verificaVictorie(jucator)) {
+                    SetConsoleTextAttribute(h,2);
 					cout << "\n *********** AVEM UN CASTIGATOR!! ***********" << endl
 						<< jucator << " A CASTIGAT!!" << endl;
+                    SetConsoleTextAttribute(h,15);
 					gameOver = true;
 					break;
 				}
 				else if (verificaRemiza()) {
+                    SetConsoleTextAttribute(h,14);
 					cout << "ESTE O REMIZA! Jucati din nou!" << endl;
+                    SetConsoleTextAttribute(h,15);
 					gameOver = true;
 					break;
 				}
@@ -238,13 +272,17 @@ void tictactoe::jocVsAI() {
 					nrVictoriAI++;
 				else
 					nrVictoriJucator_AI++;
+                SetConsoleTextAttribute(h,2);
 				cout << "\n *********** AVEM UN CASTIGATOR!! ***********" << endl
 					<< jucator << " A CASTIGAT!!" << endl;
+                SetConsoleTextAttribute(h,15);
 				gameOver = true;
 				break;
 			}
 			else if (verificaRemiza()) {
+                SetConsoleTextAttribute(h,14);
 				cout << "ESTE O REMIZA! Jucati din nou!" << endl;
+                SetConsoleTextAttribute(h,15);
 				gameOver = true;
 				break;
 			}
@@ -256,13 +294,17 @@ void tictactoe::jocVsAI() {
 					nrVictoriAI++;
 				else
 					nrVictoriJucator_AI++;
+                SetConsoleTextAttribute(h,2);
 				cout << "\n *********** AVEM UN CASTIGATOR!! ***********" << endl
 					<< jucator << " A CASTIGAT!!" << endl;
+                SetConsoleTextAttribute(h,15);
 				gameOver = true;
 				break;
 			}
 			else if (verificaRemiza()) {
+                SetConsoleTextAttribute(h,14);
 				cout << "ESTE O REMIZA! Jucati din nou!" << endl;
+                SetConsoleTextAttribute(h,15);
 				gameOver = true;
 				break;
 			}
