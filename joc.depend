@@ -1,0 +1,27 @@
+# depslib dependency file v1.0
+1654366784 source:d:\faculta\an 2\semestrul 2\poo\tictactoe(codeblocks)\joc\main.cpp
+	<bits/stdc++.h>
+	"MeniuJoc.h"
+
+1654366771 d:\faculta\an 2\semestrul 2\poo\tictactoe(codeblocks)\joc\include\meniujoc.h
+	<bits/stdc++.h>
+	"tictactoe.h"
+	"AdministrareJocuri.h"
+
+1654369123 d:\faculta\an 2\semestrul 2\poo\tictactoe(codeblocks)\joc\include\tictactoe.h
+	<bits/stdc++.h>
+	"AdministrareJocuri.h"
+
+1654368739 d:\faculta\an 2\semestrul 2\poo\tictactoe(codeblocks)\joc\include\administrarejocuri.h
+	<bits/stdc++.h>
+	"tictactoe.h"
+
+1654368737 source:d:\faculta\an 2\semestrul 2\poo\tictactoe(codeblocks)\joc\src\administrarejocuri.cpp
+	"AdministrareJocuri.h"
+
+1654370530 source:d:\faculta\an 2\semestrul 2\poo\tictactoe(codeblocks)\joc\src\meniujoc.cpp
+	"MeniuJoc.h"
+
+1654370910 source:d:\faculta\an 2\semestrul 2\poo\tictactoe(codeblocks)\joc\src\tictactoe.cpp
+	"tictactoe.h"
+
