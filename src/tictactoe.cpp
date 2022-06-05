@@ -166,10 +166,12 @@ void tictactoe::joc() {
 	afisareTabla();
 }
 void tictactoe::miscareAI(char jucator) {
-	srand(time_t(NULL)); //initializare generator de numar la intamplare .
+	size_t min,max;
+	mt19937 rng;
+	rng.seed(random_device()());
+	uniform_int_distribution<mt19937::result_type>dist(min,max);
 	while (true) {
-
-		int numar_rand = (rand() % 9) + 1;
+		int numar_rand = (dist(rng)%9)+1;
 		int row = (numar_rand - 1) / 3;
 		int col = (numar_rand - 1) % 3;
 		char bpos = tabla[row][col];

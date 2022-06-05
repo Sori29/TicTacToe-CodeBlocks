@@ -5,8 +5,11 @@ HANDLE h=GetStdHandle(STD_OUTPUT_HANDLE);
 char meniu() {
 	system("cls");
 	char optiune;
+	PlaySound(TEXT("intro_sound.wav"),NULL,SND_ASYNC);
 	SetConsoleTextAttribute(h,10);
-	cout << "******X SI 0 CREAT DE LUNGU SORIN******" << endl;
+	cout<<"  +================================================================================================================+"<<endl;
+	cout<<"  |-----------------------------------------Joc X si O realizat de Lungu Sorin-------------------------------------|"<<endl;
+	cout<<"  +================================================================================================================+"<<endl;
 	SetConsoleTextAttribute(h,9);
 	cout << "Apasati 1 pentru a juca impotriva altui jucator." << endl;
 	SetConsoleTextAttribute(h,11);
@@ -17,6 +20,7 @@ char meniu() {
 	cout << "Apasati 0 pentru a iesi din joc" << endl;
 	SetConsoleTextAttribute(h,15);
 	cin >> optiune;
+	PlaySound(NULL, 0, 0);
 	return optiune;
 }
 void salvare_joc(string numeFisier,tictactoe *joc_nou,int nrMeciuri,AdministrareJocuri *adminJocuri){
