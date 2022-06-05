@@ -8,7 +8,7 @@
 	"tictactoe.h"
 	"AdministrareJocuri.h"
 
-1654460108 d:\faculta\an 2\semestrul 2\poo\tictactoe(codeblocks)\joc\include\tictactoe.h
+1654467939 d:\faculta\an 2\semestrul 2\poo\tictactoe(codeblocks)\joc\include\tictactoe.h
 	<bits/stdc++.h>
 	"AdministrareJocuri.h"
 	<Windows.h>
@@ -24,6 +24,6 @@
 1654404897 source:d:\faculta\an 2\semestrul 2\poo\tictactoe(codeblocks)\joc\src\meniujoc.cpp
 	"MeniuJoc.h"
 
-1654460695 source:d:\faculta\an 2\semestrul 2\poo\tictactoe(codeblocks)\joc\src\tictactoe.cpp
+1654469250 source:d:\faculta\an 2\semestrul 2\poo\tictactoe(codeblocks)\joc\src\tictactoe.cpp
 	"tictactoe.h"
 

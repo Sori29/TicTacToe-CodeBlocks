@@ -11,15 +11,11 @@ void tictactoe::initializare_tabla() {
 	}
 }
 void tictactoe::afisareTabla()const {
-	cout << " --------------\n";
-	for (int row = 0; row < BSIZE; row++) {
-		cout << " | ";
-		for (int col = 0; col < BSIZE; col++) {
-			cout << tabla[row][col] << "  |";
-		}
-
-		cout << "\n --------------\n";
-	}
+	printf("\t\t\t %c | %c | %c \n", tabla[0][0], tabla[0][1], tabla[0][2]);
+	printf("\t\t\t-----------\n");
+	printf("\t\t\t %c | %c | %c \n", tabla[1][0], tabla[1][1], tabla[1][2]);
+	printf("\t\t\t-----------\n");
+	printf("\t\t\t %c | %c | %c \n\n", tabla[2][0], tabla[2][1], tabla[2][2]);
 }
 void tictactoe::miscareJucator(char jucator) {
 	//declarare variabile
@@ -388,9 +384,9 @@ int tictactoe::evaluate(int depth,char jucator,char oponent)
 int tictactoe::MiniMax(int depth,bool isMax,char jucator,char oponent)
 {
     int scor=evaluate(depth,jucator,oponent);
-    if(scor==10-depth)
+    if(scor==10)
         return scor;
-    if(scor==-10+depth)
+    if(scor==-10)
         return scor;
     if(verificaRemiza())
         return 0;
@@ -431,6 +427,10 @@ int tictactoe::MiniMax(int depth,bool isMax,char jucator,char oponent)
 }
 void tictactoe::GasireMiscareOptima(int a[2],char jucator,char oponent)
 {
+    bool isMax;
+    if(jucator=='X')
+        isMax=false;
+    else isMax=true;
     int bestVal=-1000;
     for(int row=0;row<3;row++)
     {
@@ -439,7 +439,7 @@ void tictactoe::GasireMiscareOptima(int a[2],char jucator,char oponent)
             if(tabla[row][col]==' ')
             {
                 tabla[row][col]=jucator;
-                int moveVal = MiniMax(0,false,jucator,oponent);
+                int moveVal = MiniMax(0,isMax,jucator,oponent);
                 tabla[row][col]=' ';
                 if(moveVal> bestVal)
                 {
