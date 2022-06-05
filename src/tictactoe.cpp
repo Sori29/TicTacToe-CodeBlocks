@@ -2,7 +2,6 @@
 tictactoe::tictactoe() {
 	initializare_tabla();
 }
-
 void tictactoe::initializare_tabla() {
 	nrMiscari = 0;
 	for (int row = 0; row < BSIZE; row++) {
@@ -74,6 +73,12 @@ char tictactoe::schimbaJucator(char jucator) {
 
 	jucator = jucator == 'X' ? 'O' : 'X';
 	return (jucator);
+}
+char tictactoe::get_oponent(char jucator)
+{
+    if(jucator=='X')
+        return 'O';
+    else return 'X';
 }
 
 bool tictactoe::verificaVictorie(char jucator)const {
@@ -165,31 +170,46 @@ void tictactoe::joc() {
 
 	afisareTabla();
 }
-void tictactoe::miscareAI(char jucator) {
-	size_t min,max;
-	mt19937 rng;
-	rng.seed(random_device()());
-	uniform_int_distribution<mt19937::result_type>dist(min,max);
-	while (true) {
-		int numar_rand = (dist(rng)%9)+1;
-		int row = (numar_rand - 1) / 3;
-		int col = (numar_rand - 1) % 3;
-		char bpos = tabla[row][col];
-		//verificare daca pozitia este goala
-		if (bpos == 'X' || bpos == 'O') { //daca da, atunci alege alt numar
-			continue;
-		}
-		else { //daca nu, introduce simbolul pe pozitia aleasa
-			cout << "Calculator a ales pozitia: " << numar_rand << endl;
-			tabla[row][col] = jucator;
-			buffer[nrMiscari] = numar_rand;
-			nrMiscari++;
-			break;
-		}
-	}
+void tictactoe::miscareAI(char jucator,int dificultate) {
+    if(dificultate==0 || nrMiscari<=1)
+    {
+        size_t min,max;
+        mt19937 rng;
+        rng.seed(random_device()());
+        uniform_int_distribution<mt19937::result_type>dist(min,max);
+        while (true) {
+            int numar_rand = (dist(rng)%9)+1;
+            int row = (numar_rand - 1) / 3;
+            int col = (numar_rand - 1) % 3;
+            char bpos = tabla[row][col];
+            //verificare daca pozitia este goala
+            if (bpos == 'X' || bpos == 'O') { //daca da, atunci alege alt numar
+                continue;
+            }
+            else { //daca nu, introduce simbolul pe pozitia aleasa
+                cout << "Calculator a ales pozitia: " << numar_rand << endl;
+                tabla[row][col] = jucator;
+                buffer[nrMiscari] = numar_rand;
+                nrMiscari++;
+                break;
+            }
+        }
 	cout << "Numar total de miscari: " << nrMiscari << endl;
+    }
+    else if(dificultate==1 && nrMiscari>1){
+        int a[2];
+        char oponent=get_oponent(jucator);
+        GasireMiscareOptima(a,jucator,oponent);
+        int numar_rand=a[0]*3+a[1]+1;
+        cout<<"Calculatorul a ales pozitia: "<<numar_rand<<endl;
+        tabla[a[0]][a[1]]=jucator;
+        buffer[nrMiscari]=numar_rand;
+        nrMiscari++;
+        cout << "Numar total de miscari: " << nrMiscari << endl;
+    }
 }
-void tictactoe::jocVsAI() {
+
+void tictactoe::jocVsAI(int dificultate) {
     HANDLE h=GetStdHandle(STD_OUTPUT_HANDLE);
     cout<<"ID-ul meciului este: ";
     SetConsoleTextAttribute(h,9);
@@ -242,7 +262,7 @@ void tictactoe::jocVsAI() {
 					break;
 				}
 				jucator = schimbaJucator(jucator);
-				miscareAI(jucator); //comp jucator
+				miscareAI(jucator,dificultate); //comp jucator
 				PlaySound(TEXT("sound1.wav"),NULL,SND_ALIAS);
 				if (verificaVictorie(jucator)) {
                     SetConsoleTextAttribute(h,2);
@@ -266,7 +286,7 @@ void tictactoe::jocVsAI() {
 	else {
 		do {
 			jucator = schimbaJucator(jucator);
-			miscareAI(jucator);
+			miscareAI(jucator,dificultate);
 			afisareTabla();
 			PlaySound(TEXT("sound1.wav"),NULL,SND_ALIAS);
 			if (verificaVictorie(jucator)) {
@@ -353,5 +373,81 @@ void tictactoe::Preluare_joc(string istoric_joc)
         else tabla[row][col]='X';
         afisareTabla();
         contor_miscare++;
+    }
+}
+
+int tictactoe::evaluate(int depth,char jucator,char oponent)
+{
+    if(verificaVictorie(jucator)==1)
+        return +10-depth;
+    else if(verificaVictorie(oponent)==1)
+        return -10+depth;
+    return 0;
+}
+
+int tictactoe::MiniMax(int depth,bool isMax,char jucator,char oponent)
+{
+    int scor=evaluate(depth,jucator,oponent);
+    if(scor==10-depth)
+        return scor;
+    if(scor==-10+depth)
+        return scor;
+    if(verificaRemiza())
+        return 0;
+    if(isMax)
+    {
+        int best=-1000;
+        for(int row=0;row<3;row++)
+        {
+            for(int col=0;col<3;col++)
+            {
+                if(tabla[row][col]==' ')
+                {
+                    tabla[row][col]=jucator;
+                    best=max(best,MiniMax(depth+1,!isMax,jucator,oponent));
+                    tabla[row][col]=' ';
+                }
+            }
+        }
+        return best;
+    }
+    else
+    {
+        int best=1000;
+        for(int row=0;row<3;row++)
+        {
+            for(int col=0;col<3;col++)
+            {
+                if(tabla[row][col]==' ')
+                {
+                    tabla[row][col]=oponent;
+                    best=min(best,MiniMax(depth+1,!isMax,oponent,jucator));
+                    tabla[row][col]=' ';
+                }
+            }
+        }
+        return best;
+    }
+}
+void tictactoe::GasireMiscareOptima(int a[2],char jucator,char oponent)
+{
+    int bestVal=-1000;
+    for(int row=0;row<3;row++)
+    {
+        for(int col=0;col<3;col++)
+        {
+            if(tabla[row][col]==' ')
+            {
+                tabla[row][col]=jucator;
+                int moveVal = MiniMax(0,false,jucator,oponent);
+                tabla[row][col]=' ';
+                if(moveVal> bestVal)
+                {
+                    a[0]=row;
+                    a[1]=col;
+                    bestVal=moveVal;
+                }
+            }
+        }
     }
 }

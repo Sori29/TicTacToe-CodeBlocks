@@ -71,9 +71,12 @@ void comanda() {
             else nrMeciuri--;
 			break;
 		case '2':
+			int dificultate;
+			cout<<"Alege nivelul de dificultate(0 - Usor / 1 - Dificil):";
+			cin>>dificultate;
 			cin.ignore();
 			joc_nou->initializare_tabla();
-			joc_nou->jocVsAI();
+			joc_nou->jocVsAI(dificultate);
             nrMeciuri++;
 			cout<<"Doriti sa salvati jocul?(Y/N):";
 			cin>>alegere;

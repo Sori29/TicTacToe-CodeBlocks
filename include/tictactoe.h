@@ -12,15 +12,19 @@ public:
 	tictactoe(); // constructor implicit
 	void afisareTabla()const; // functie de afisare tabla de joc
 	void miscareJucator(char jucator); //preluare si verificare pozitie introdusa de utilizator, daca este valida o introduce in matrice
-	void miscareAI(char jucator); //simulare miscare robot
+	void miscareAI(char jucator,int dificulate); //simulare miscare robot
 	void joc();//functie principala pentru joc cu 2 jucatori
-	void jocVsAI(); //functie principala pentru joc 1 jucator vs calculatorul
+	void jocVsAI(int dificultate); //functie principala pentru joc 1 jucator vs calculatorul
 	void setID(int IDMeci);
 	int getID();
 	friend char meniu(); // meniu principal
 	friend void comanda(); // preluare comanda pentru meniu
 	string Conversie_La_Sir_Pentru_Fisier();
 	void Preluare_joc(string istoric_joc);
+	int evaluate(int depth,char player,char oponent);
+	int MiniMax(int depth,bool isMax,char player,char oponent);
+	void GasireMiscareOptima(int a[2],char player,char oponent);
+	char get_oponent(char player);
 
 private:
 	int IDMeci=0;
