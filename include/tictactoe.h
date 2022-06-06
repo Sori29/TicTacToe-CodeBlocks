@@ -21,9 +21,8 @@ public:
 	friend void comanda(); // preluare comanda pentru meniu
 	string Conversie_La_Sir_Pentru_Fisier();
 	void Preluare_joc(string istoric_joc);
-	int evaluate(int depth,char player,char oponent);
-	int MiniMax(int depth,bool isMax,char player,char oponent);
-	void GasireMiscareOptima(int a[2],char player,char oponent);
+	int MiniMax(int depth,bool isAI,char jucator);
+	int GasireMiscareOptima(int movIndex,char jucator);
 	char get_oponent(char player);
 
 private:

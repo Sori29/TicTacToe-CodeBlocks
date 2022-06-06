@@ -3,12 +3,12 @@
 	<bits/stdc++.h>
 	"MeniuJoc.h"
 
-1654366771 d:\faculta\an 2\semestrul 2\poo\tictactoe(codeblocks)\joc\include\meniujoc.h
+1654548759 d:\faculta\an 2\semestrul 2\poo\tictactoe(codeblocks)\joc\include\meniujoc.h
 	<bits/stdc++.h>
 	"tictactoe.h"
 	"AdministrareJocuri.h"
 
-1654467939 d:\faculta\an 2\semestrul 2\poo\tictactoe(codeblocks)\joc\include\tictactoe.h
+1654479538 d:\faculta\an 2\semestrul 2\poo\tictactoe(codeblocks)\joc\include\tictactoe.h
 	<bits/stdc++.h>
 	"AdministrareJocuri.h"
 	<Windows.h>
@@ -21,9 +21,9 @@
 1654368737 source:d:\faculta\an 2\semestrul 2\poo\tictactoe(codeblocks)\joc\src\administrarejocuri.cpp
 	"AdministrareJocuri.h"
 
-1654404897 source:d:\faculta\an 2\semestrul 2\poo\tictactoe(codeblocks)\joc\src\meniujoc.cpp
+1654548535 source:d:\faculta\an 2\semestrul 2\poo\tictactoe(codeblocks)\joc\src\meniujoc.cpp
 	"MeniuJoc.h"
 
-1654469250 source:d:\faculta\an 2\semestrul 2\poo\tictactoe(codeblocks)\joc\src\tictactoe.cpp
+1654548535 source:d:\faculta\an 2\semestrul 2\poo\tictactoe(codeblocks)\joc\src\tictactoe.cpp
 	"tictactoe.h"
 

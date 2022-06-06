@@ -32,6 +32,7 @@ if(!numeFisier.empty()){
     SetConsoleTextAttribute(h,15);
     cout<<" doriti sa schimbati numele fisierului(Y/N):";
     cin>>alegere;
+    PlaySound(TEXT("sunet_optiune.wav"),NULL,SND_ASYNC);
     if(toupper(alegere)=='Y')
         cin>>numeFisier;
 }
@@ -62,36 +63,58 @@ void comanda() {
 		case '1':
 			cin.ignore(); //ignorare caractere in plus introduse in buffer pe care functia getline le preia
 			joc_nou->initializare_tabla();
+            PlaySound(TEXT("sunet_optiune.wav"),NULL,SND_ASYNC);
 			joc_nou->joc();
 			nrMeciuri++;
 			cout<<"Doriti sa salvati jocul?(Y/N):";
 			cin>>alegere;
+			PlaySound(TEXT("sunet_optiune.wav"),NULL,SND_ASYNC);
 			if(toupper(alegere)=='Y')
                 salvare_joc(numeFisier,joc_nou,nrMeciuri,adminJocuri);
-            else nrMeciuri--;
+            else if(toupper(alegere)=='N')
+                nrMeciuri--;
+            else {
+                cout<<"Introduceti o valoare valida\n";
+                PlaySound(TEXT("sunet_eroare.wav"),NULL,SND_ASYNC);
+            }
 			break;
 		case '2':
 			int dificultate;
-			cout<<"Alege nivelul de dificultate(0 - Usor / 1 - Dificil):";
-			cin>>dificultate;
-			cin.ignore();
+			PlaySound(TEXT("sunet_optiune.wav"),NULL,SND_ASYNC);
+			while(true){
+                cin.ignore();
+                cout<<"Alege nivelul de dificultate(0 - Usor / 1 - Dificil):";
+                cin>>dificultate;
+                if(dificultate==0 || dificultate==1){
+                    PlaySound(TEXT("sunet_optiune.wav"),NULL,SND_ASYNC);
+                    break;
+                }
+                else{
+                    cout<<"Introduceti o valoare valida\n";
+                    PlaySound(TEXT("sunet_eroare.wav"),NULL,SND_ASYNC);
+                }
+			}
 			joc_nou->initializare_tabla();
 			joc_nou->jocVsAI(dificultate);
             nrMeciuri++;
 			cout<<"Doriti sa salvati jocul?(Y/N):";
 			cin>>alegere;
+			PlaySound(TEXT("sunet_optiune.wav"),NULL,SND_ASYNC);
 			if(toupper(alegere)=='Y')
                 salvare_joc(numeFisier,joc_nou,nrMeciuri,adminJocuri);
             else nrMeciuri--;
 			break;
         case '3':
             cin.ignore();
+            PlaySound(TEXT("sunet_optiune.wav"),NULL,SND_ASYNC);
             int IDCautat;
             cout<<"Introduceti ID-ul jocului:"; cin>>IDCautat;
             string istoric_joc=adminJocuri->PreluareJoc(numeFisier,IDCautat);
             if(istoric_joc!="Jocul nu a fost gasit")
                 joc_nou->Preluare_joc(istoric_joc);
-            else cout<<istoric_joc<<"\n";
+            else {
+                    PlaySound(TEXT("sunet_optiune.wav"),NULL,SND_ASYNC);
+                    cout<<istoric_joc<<"\n";}
 		}
 		system("pause");
 	} while (comanda != '0');
