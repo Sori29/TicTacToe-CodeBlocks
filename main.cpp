@@ -3,6 +3,7 @@
 using namespace std;
 
 int main() {
+    SetConsoleTitle("X si O");
 	//afisare meniu
 	comanda();
 	//previne jocul din a iesi prea repede

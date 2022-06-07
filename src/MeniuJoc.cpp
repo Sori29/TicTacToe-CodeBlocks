@@ -10,6 +10,8 @@ char meniu() {
 	cout<<"  +================================================================================================================+"<<endl;
 	cout<<"  |-----------------------------------------Joc X si O realizat de Lungu Sorin-------------------------------------|"<<endl;
 	cout<<"  +================================================================================================================+"<<endl;
+	SetConsoleTextAttribute(h,15);
+	instructiuni();
 	SetConsoleTextAttribute(h,9);
 	cout << "Apasati 1 pentru a juca impotriva altui jucator." << endl;
 	SetConsoleTextAttribute(h,11);
@@ -143,4 +145,17 @@ void comanda() {
 		system("pause");
 	} while (comanda != '0');
 	exit(0);
+}
+
+void instructiuni()
+{
+    printf("Maparea pozitiilor pe tabla de joc\n\n");
+	printf("\t\t\t 1 | 2 | 3 \n");
+	printf("\t\t\t-----------\n");
+	printf("\t\t\t 4 | 5 | 6 \n");
+	printf("\t\t\t-----------\n");
+	printf("\t\t\t 7 | 8 | 9 \n\n");
+	printf("-\t-\t-\t-\t-\t-\t-\t-\t-\t-\n\n");
+
+	return;
 }

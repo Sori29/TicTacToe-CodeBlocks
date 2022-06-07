@@ -10,6 +10,6 @@ using namespace std;
 void comanda();
 char meniu();
 void salvare_joc(string numeFisier,tictactoe *joc_nou,int nrMeciuri,AdministrareJocuri *adminJocuri);
-
+void instructiuni();
 
 #endif // MENIUJOC_H
