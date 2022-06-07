@@ -19,6 +19,7 @@ char meniu() {
 	SetConsoleTextAttribute(h,12);
 	cout << "Apasati 0 pentru a iesi din joc" << endl;
 	SetConsoleTextAttribute(h,15);
+	cout<<"\nIntroduceti optiunea: ";
 	cin >> optiune;
 	PlaySound(NULL, 0, 0);
 	return optiune;
@@ -79,14 +80,16 @@ void comanda() {
             }
 			break;
 		case '2':
-			int dificultate;
+			char dificultate;
+			int dif;
 			PlaySound(TEXT("sunet_optiune.wav"),NULL,SND_ASYNC);
 			while(true){
                 cin.ignore();
                 cout<<"Alege nivelul de dificultate(0 - Usor / 1 - Dificil):";
                 cin>>dificultate;
-                if(dificultate==0 || dificultate==1){
+                if((dificultate=='0' || dificultate=='1') && isdigit(dificultate)){
                     PlaySound(TEXT("sunet_optiune.wav"),NULL,SND_ASYNC);
+                    dif=dificultate-'0';
                     break;
                 }
                 else{
@@ -95,16 +98,29 @@ void comanda() {
                 }
 			}
 			joc_nou->initializare_tabla();
-			joc_nou->jocVsAI(dificultate);
+			joc_nou->jocVsAI(dif);
             nrMeciuri++;
 			cout<<"Doriti sa salvati jocul?(Y/N):";
 			cin>>alegere;
-			PlaySound(TEXT("sunet_optiune.wav"),NULL,SND_ASYNC);
-			if(toupper(alegere)=='Y')
-                salvare_joc(numeFisier,joc_nou,nrMeciuri,adminJocuri);
-            else nrMeciuri--;
+			while(true)
+            {
+                if(toupper(alegere)=='Y'){
+                    PlaySound(TEXT("sunet_optiune.wav"),NULL,SND_ASYNC);
+                    salvare_joc(numeFisier,joc_nou,nrMeciuri,adminJocuri);
+                    break;}
+                else if(toupper(alegere)=='N'){
+                    nrMeciuri--;
+                    PlaySound(TEXT("sunet_optiune.wav"),NULL,SND_ASYNC);
+                    break;
+                }
+                else{
+                    PlaySound(TEXT("sunet_eroare.wav"),NULL,SND_ASYNC);
+                    cout<<"Introduceti o valoare valida: ";
+                    cin>>alegere;
+                }
+            }
 			break;
-        case '3':
+        case '3':{
             cin.ignore();
             PlaySound(TEXT("sunet_optiune.wav"),NULL,SND_ASYNC);
             int IDCautat;
@@ -114,7 +130,15 @@ void comanda() {
                 joc_nou->Preluare_joc(istoric_joc);
             else {
                     PlaySound(TEXT("sunet_optiune.wav"),NULL,SND_ASYNC);
-                    cout<<istoric_joc<<"\n";}
+                    cout<<istoric_joc<<"\n";}}
+            break;
+        case '0':
+            PlaySound(TEXT("sunet_optiune.wav"),NULL,SND_ASYNC);
+            break;
+        default:
+            PlaySound(TEXT("sunet_eroare.wav"),NULL,SND_ASYNC);
+            cout<<"Introduceti o valoare valida\n";
+            break;
 		}
 		system("pause");
 	} while (comanda != '0');

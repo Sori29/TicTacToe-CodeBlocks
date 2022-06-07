@@ -395,9 +395,9 @@ int tictactoe::MiniMax(int depth,bool isAI,char jucator)
     if(verificaVictorie(jucator))
     {
         if(isAI==true)
-            return -1;
-        else
             return +1;
+        else
+            return -1;
     }
     else
     {
@@ -461,7 +461,7 @@ int tictactoe::GasireMiscareOptima(int movIndex,char jucator)
 			if (tabla[row][col] == ' ')
 			{
 				tabla[row][col] = jucator;
-				score = MiniMax(movIndex+1, false,jucator);
+				score = MiniMax(movIndex+1, true,jucator);
 				tabla[row][col] = ' ';
 				if(score > bestScore)
 				{
